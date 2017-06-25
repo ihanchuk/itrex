@@ -49,11 +49,11 @@ passport.use('local-login', new LocalStrategy({passReqToCallback: true},
         User.findOne({'username': username})
             .then((user) => {
                 if (!user) {
-                    return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+                    return done(null, false);
                 }
                 if (!user.validPassword(password)) {
                     console.log("Wrong password");
-                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+                    return done(null, false);
                 }
                 return done(null, user);
             })
@@ -71,6 +71,14 @@ app.get('/login',
         console.log(req.user);
         res.send("hi user");
     });
+
+
+var socketServer = require('http').createServer(app);
+var io = require('socket.io')(socketServer);
+io.on('connection', function(){
+    console.log("socket connected");
+});
+socketServer.listen(3333);
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!')
