@@ -1,25 +1,37 @@
 class RootController {
-    constructor($http) {
-        $http({
-            method:'POST',
-            data:{
-                username:'admin',
-                password:'test123456789'
-            },
-            url:'http://localhost:3000/login'
+    constructor( $scope, $http, USER_ROLES, AuthService, $timeout) {
+        this.ajax = $http;
+        this.timeout = $timeout;
+        $scope.currentUser = null;
+        $scope.userRoles = USER_ROLES;
+        $scope.isAuthorized = AuthService.isAuthorized;
+
+        $scope.setCurrentUser = function (user) {
+            $scope.currentUser = user;
+        };
+    }
+
+    sendCredentials(credentials){
+        this.ajax({
+            url:'http://localhost:3000/login',
+            method:"POST",
+            data: credentials
         }).then(function(data){
-                console.log(data);
-            });
+            console.log("Sended credntials");
+        });
     }
 
     $onInit() {
-        console.log("initializing  Root...");
-    }
+        this.sendCredentials({
+            username:'admin',
+            password:'test123456789'
+        });
 
+    }
     $onDestroy() {
-        console.log("destroying Root...");
     }
 }
 
-RootController.$inject = ['$http'];
+RootController.$inject = ['$scope','$http', 'USER_ROLES', 'AuthService' ,'$timeout'];
+
 export default RootController;

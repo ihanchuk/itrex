@@ -10,7 +10,6 @@ const mongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const cors = require('express-cors');
 
-
 mongoose.connect(appConfig.db.connectionString);
 
 app.use(cors({
@@ -22,8 +21,6 @@ app.use( bodyParser.json() );
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
-
 
 app.use(cookieParser());
 app.use(session({
@@ -74,14 +71,6 @@ passport.use('local-login', new LocalStrategy({passReqToCallback: true},
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
-app.post('/login',
-    passport.authenticate('local-login'),
-    function(req, res) {
-        res.send(req.user);
-    });
-
 var socketServer = require('http').createServer(app);
 var io = require('socket.io')(socketServer);
 io.on('connection', function(){
@@ -90,10 +79,29 @@ io.on('connection', function(){
 socketServer.listen(3333);
 
 app.get("/", function(req, resp){
+  if(req.user){
+      resp.json(req.user);
+  }else{
+      resp.json({
+          message: "I dont know this user"
+      });
+  }
+});
+
+app.get('/emails', (req, resp)=>{
     resp.json({
-        message:'hello'
+        emails: [
+            {sender:'Goga', text:'dummy text'},
+            {sender:'Lelik', text:'dummy text2'}
+        ]
     });
 });
+
+app.post('/login',
+    passport.authenticate('local-login'),
+    function(req, res) {
+        res.send(req.user);
+    });
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!')
