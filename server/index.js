@@ -8,13 +8,22 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session')
 const mongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
+const cors = require('express-cors');
+
 
 mongoose.connect(appConfig.db.connectionString);
+
+app.use(cors({
+    allowedOrigins: ['http://localhost:7000', 'http://localhost'
+    ]}
+));
 
 app.use( bodyParser.json() );
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+
 
 app.use(cookieParser());
 app.use(session({
@@ -65,13 +74,13 @@ passport.use('local-login', new LocalStrategy({passReqToCallback: true},
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/login',
+
+
+app.post('/login',
     passport.authenticate('local-login'),
     function(req, res) {
-        console.log(req.user);
-        res.send("hi user");
+        res.send(req.user);
     });
-
 
 var socketServer = require('http').createServer(app);
 var io = require('socket.io')(socketServer);
@@ -79,6 +88,12 @@ io.on('connection', function(){
     console.log("socket connected");
 });
 socketServer.listen(3333);
+
+app.get("/", function(req, resp){
+    resp.json({
+        message:'hello'
+    });
+});
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!')
