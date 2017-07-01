@@ -18,7 +18,10 @@ class RootController {
             data: credentials
         }).then(function(data){
             console.log("Sended credntials");
-        });
+        })
+            .catch( (err)=>{
+                console.log(err);
+            });
     }
 
     $onInit() {

@@ -3,13 +3,17 @@ class EmailsController {
         this.ajax = $http;
     }
     sendCredentials(){
-        console.info('!!!!');
+
         this.ajax({
             url:'http://localhost:3000/emails',
-            method:"GET",
-        }).then(function(data){
-            console.log(data);
-        });
+            method:"GET"
+        })
+            .then(function(data){
+                console.log(data);
+            })
+            .catch(function(err){
+                console.log(err);
+            });
     }
     $onInit() {
         this.sendCredentials();

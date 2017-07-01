@@ -6,6 +6,8 @@ import Login from './components/login/login-component';
 import Emails from './components/emails/emails-component';
 import Routes from './routing/index';
 
+import io from 'socket.io-client';
+
 const app = angular.module('app', [uiRouter, ngAnimate]);
 app.component('layout', new Root);
 app.component('login', new Login);
@@ -70,12 +72,19 @@ app.factory('AuthService', function ($http, Session) {
     return authService;
 });
 
-app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider' ,
-    ($stateProvider, $urlRouterProvider, $httpProvider)=>{
+app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider' , '$qProvider',
+    ($stateProvider, $urlRouterProvider, $httpProvider, $qProvider)=>{
         $httpProvider.defaults.withCredentials = true;
+        $qProvider.errorOnUnhandledRejections(false);
+
         Routes.forEach( (route) =>$stateProvider.state(route));
         $urlRouterProvider.otherwise('/');
+
+}]);
+app.run(['$http', ($http)=>{
+    console.info('Run function!!!');
+    let connection = io('http://localhost:3777');
+    connection.emit('client::newClient', {data:'hi'});
 }]);
 
-app.run(['$http', ($http)=>{}]);
 export { app };
