@@ -8,4 +8,3 @@ export  default class Root {
         this.controller = RootController;
     }
 }
-

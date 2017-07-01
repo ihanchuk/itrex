@@ -1,10 +1,23 @@
-<div>
-    <h3>Layout Component</h3>
-    <a ui-sref="login">Login</a>
-    <a ui-sref="emails">Emails</a>
-    <div  class="view-container" ui-view>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">IT-REX TA:: </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a ui-sref="login">Login</a></li>
+                <li><a ui-sref="emails">Emails</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div  class="view-container col-lg-12 row" ui-view></div>
     </div>
 </div>
-
-
-
