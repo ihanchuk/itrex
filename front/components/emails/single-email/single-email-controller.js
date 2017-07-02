@@ -1,12 +1,7 @@
-const controller =($scope)=>{
-    $scope.id = 234;
-    $scope.onDelete = (email)=>{
-        console.log("deleting", email);
-    }
+const SingleEmailController = function(){
+    this.onDelete = (el)=>{
+        console.log("deleting element", this.email);
+    };
 };
 
-controller.$inject=['$scope'];
-
-export default controller;
-
-
+export default SingleEmailController;

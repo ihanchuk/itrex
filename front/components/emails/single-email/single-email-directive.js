@@ -1,17 +1,22 @@
 import email from './single-email.html';
-import controller from './single-email-controller';
+import SingleEmailController from './single-email-controller';
 
 const singleEmail = ()=>{
-    return{
+    return {
+        restrict:'AE',
         template: email,
-        restrict: 'E',
-        scope:{
-            email:'<'
+        bindToController: {
+            email: '<'
         },
-        controllerAs: '$ctrl',
-        controller:controller
+        // controller: function () {
+        //     this.onDelete = (el)=>{
+        //         console.log("deleting element", this.email);
+        //     };
+        // },
+        controller:SingleEmailController,
+        controllerAs: '$ctrl'
     }
-}
+};
 
 export default singleEmail;
 

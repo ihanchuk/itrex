@@ -1,5 +1,5 @@
 <div class="col-md-6 email-letter">
-    <h2>Name: {{email.name}} t - {{id}}</h2>
+    <h2>Name: {{$ctrl.email.name}}</h2>
     <div class="email-row">
         <div class="param">to::</div>
         <div class="val">John Doe</div>
@@ -16,5 +16,5 @@
         <div class="param">email-body::</div>
         <div class="val">My super letter</div>
     </div>
-    <input type="button" value="delete" class="btn btn-primary" ng-click="onDelete(email)">
+    <input type="button" value="delete" class="btn btn-primary" ng-click="$ctrl.onDelete()">
 </div>
