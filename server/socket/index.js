@@ -1,8 +1,4 @@
-const events =require('./events');
-
 module.exports = (server)=>{
-    server.on('client::getEmails', events.onGetEmails);
-    server.on('test', function(data){
-        console.log('connected to new client');
-    });
+    server.on('client::getEmailsRequest', require('./events/on-get-emails')(server));
+    server.on('client::deleteEmailRequest', require('./events/on-delete-email')(server));
 };

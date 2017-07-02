@@ -1,27 +1,17 @@
 class EmailsController {
-    constructor( $scope, $http) {
-        this.ajax = $http;
-    }
-    sendCredentials(){
-
-        this.ajax({
-            url:'http://localhost:3000/emails',
-            method:"GET"
-        })
-            .then(function(data){
-                console.log(data);
-            })
-            .catch(function(err){
-                console.log(err);
-            });
+    constructor(SMS) {
+        this.sms = SMS;
+        let subscription = SMS.on('server::deletedEmail', function(){
+            alert("email deleted");
+        });
     }
     $onInit() {
-        this.sendCredentials();
+        this.sms.emit('client::getEmailsRequest',{});
    }
     $onDestroy() {
     }
 }
-EmailsController.$inject = ['$scope','$http', 'USER_ROLES', 'AuthService' ,'$timeout'];
+EmailsController.$inject = ['SMS'];
 
 export default EmailsController;
 

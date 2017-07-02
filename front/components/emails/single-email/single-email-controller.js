@@ -1,7 +1,6 @@
 const SingleEmailController = function(SMS){
-    SMS.emit('test', {data:12});
     this.onDelete = (el)=>{
-        console.log("deleting element", this.email);
+        SMS.emit('client::deleteEmailRequest', this.email);
     };
 };
 
