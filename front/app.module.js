@@ -4,9 +4,11 @@ import ngAnimate from 'angular-animate';
 
 import roles from './bootstrap/constants/roles';
 import authEvents from './bootstrap/events/auth-events';
+import endpoints from './bootstrap/constants/endpoints';
 
 import session from './bootstrap/services/session-service';
 import auth from './bootstrap/services/auth-service';
+import socket from './bootstrap/services/scocket-service';
 
 import configLoader from './bootstrap/loaders/config-loader';
 import runLoader from './bootstrap/loaders/run-loader';
@@ -25,9 +27,11 @@ app.component('emails', new Emails);
 
 app.constant('AUTH_EVENTS', authEvents);
 app.constant('USER_ROLES', roles);
+app.constant('ENDPOINTS', endpoints);
 
 app.factory('Session', session);
 app.factory('AuthService', auth);
+app.service('SMS', socket);
 
 app.directive('singleEmail', singleEmail);
 

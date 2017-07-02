@@ -8,17 +8,9 @@ const singleEmail = ()=>{
         bindToController: {
             email: '<'
         },
-        // controller: function () {
-        //     this.onDelete = (el)=>{
-        //         console.log("deleting element", this.email);
-        //     };
-        // },
         controller:SingleEmailController,
         controllerAs: '$ctrl'
     }
 };
 
 export default singleEmail;
-
-
-
