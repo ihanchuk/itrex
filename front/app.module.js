@@ -15,6 +15,8 @@ import Root from './components/root-component';
 import Login from './components/login/login-component';
 import Emails from './components/emails/emails-component';
 
+import singleEmail from './components/emails/single-email/single-email-directive';
+
 const app = angular.module('app', [uiRouter, ngAnimate]);
 
 app.component('layout', new Root);
@@ -26,6 +28,8 @@ app.constant('USER_ROLES', roles);
 
 app.factory('Session', session);
 app.factory('AuthService', auth);
+
+app.directive('singleEmail', singleEmail);
 
 app.config(configLoader);
 app.run(runLoader);

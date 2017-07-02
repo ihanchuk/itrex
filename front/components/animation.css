@@ -1,5 +1,5 @@
 [ui-view].ng-enter, [ui-view].ng-leave{
-    position:absolute;
+    position:relative;
     left:0;
     transition: all .1s ease-in-out;
 }
@@ -19,7 +19,3 @@
 [ui-view].ng-leave-active{
     opacity:0;
 }
-
-
-
-

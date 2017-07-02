@@ -10,9 +10,7 @@ const socketServer = require('http').createServer(app);
 const io = require('socket.io')(socketServer);
 
 io.on('connection', (server)=>{
-    server.on('client::newClient', (data)=>{
-        console.log("New data", data);
-    });
+    require('./socket')(server);
 });
 
 io.listen(3777);
