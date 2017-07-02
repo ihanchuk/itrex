@@ -1,8 +1,11 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 const appConfig = require('./config');
 
-require('./bootstrap')(app, appConfig);
+mongoose.connect(appConfig.db.connectionString);
+
+require('./bootstrap')(app, appConfig, mongoose);
 
 const passport = require('./auth/passport')(app);
 

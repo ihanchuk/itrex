@@ -2,9 +2,7 @@ const session = require('express-session');
 const mongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 
-module.exports = (app, config)=>{
-
-    mongoose.connect(config.db.connectionString);
+module.exports = (app, config, db)=>{
 
     app.use(session({
         secret: config.session.secret,
@@ -12,7 +10,7 @@ module.exports = (app, config)=>{
         saveUninitialized: config.session.saveUninitialized,
         httpOnly: config.session.httpOnly,
         store: new mongoStore({
-            mongooseConnection: mongoose.connection,
+            mongooseConnection: db.connection,
             autoRemove: config.session.storeConfig.autoRemove,
             autoRemoveInterval: config.session.storeConfig.autoRemoveInterval,
             ttl: config.session.storeConfig.ttl

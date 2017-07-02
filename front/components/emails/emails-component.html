@@ -1,4 +1,10 @@
-<h2>Emails::</h2>
+<h2>Emails::{{emails.length}}</h2>
 <hr>
-<single-email email="{name:'andre'}"></single-email>
+<div ng-repeat="email in emails">
+    <single-email email="email"></single-email>
+</div>
+
+
+
+
 

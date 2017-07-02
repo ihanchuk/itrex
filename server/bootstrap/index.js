@@ -1,4 +1,4 @@
-module.exports = (app, config)=>{
+module.exports = (app, config, db)=>{
     require('./default-miidlewares')(app);
-    require('./session')(app, config);
+    require('./session')(app, config, db);
 };

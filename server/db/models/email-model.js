@@ -5,10 +5,7 @@ const messageSchema = new Schema({
     author:  String,
     email: String,
     message: String,
-    date: {
-        type: Date,
-        default: Date.now
-    }
+    subject: String
 });
 
 const MessageModel = mongoose.model('MessageModel', messageSchema);
