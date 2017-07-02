@@ -1,26 +1,20 @@
-class EmailsController {
-    constructor(SMS, $scope) {
-        this.sms = SMS;
-        this.scope = $scope;
-        let that = this;
-        SMS.on('server::deletedEmail', function(){
-          //  alert("email deleted");
-        });
+const EmailsController = function (SMS, $scope) {
+    SMS.on('server::deletedEmail', ()=>{
+        alert("email deleted");
+    });
 
-        SMS.on('server:deliveredNewEmails', function(data){
-            if(data.status == 200) {
-                console.log(data.newEmails[1]);
-                that.scope.emails = data.newEmails;
-                that.scope.$digest();
-            }
-        });
+    SMS.on('server:deliveredNewEmails', (data)=>{
+        if (data.status == 200) {
+            $scope.emails = data.newEmails;
+            $scope.$digest();
+        }
+    });
+
+    this.$onInit = ()=>{
+        SMS.emit('client::getEmailsRequest', {});
     }
-    $onInit() {
-        this.sms.emit('client::getEmailsRequest',{});
-   }
-    $onDestroy() {
-    }
-}
+};
+
 EmailsController.$inject = ['SMS', '$scope'];
 
 export default EmailsController;
