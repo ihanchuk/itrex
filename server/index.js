@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const templateEngine  = require('nunjucks');
 const app = express();
 const appConfig = require('./config');
 
@@ -17,6 +18,11 @@ io.on('connection', (server)=>{
 });
 
 io.listen(3777);
+
+templateEngine.configure('server/templates', {
+    autoescape: true,
+    express: app
+});
 
 app.get("/",  require('./controllers/index-page'));
 app.get('/emails', require('./controllers/emails'));

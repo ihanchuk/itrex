@@ -1,4 +1,4 @@
-const NewEmailController = function (SMS, $scope) {
+const NewEmailController = function (SMS) {
     this.to =null;
     this.email =null;
     this.subj = null;
@@ -6,20 +6,24 @@ const NewEmailController = function (SMS, $scope) {
     
     let vm = this;
 
+    SMS.on('server::emailSendResponse', function(data){
+        console.log(data);
+    });
+
     this.onSendNewEmail = function(){
         let data = {
-           to: vm.to,
+            to: vm.to,
             email: vm.email,
             subj: vm.subj,
             emailBody: vm.emailBody
         };
-        console.log('sending new email', data);
+        SMS.emit('client::sendMessage', data);
     }
 };
 
 NewEmailController.$inject = ['SMS', '$scope'];
 
-export default NewEmailController;
+export default NewEmailController; 
 
 
 
