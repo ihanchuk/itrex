@@ -1,4 +1,4 @@
-const NewEmailController = function (SMS) {
+const NewEmailController = function (SMS, $scope) {
     this.to =null;
     this.email =null;
     this.subj = null;
@@ -7,7 +7,17 @@ const NewEmailController = function (SMS) {
     let vm = this;
 
     SMS.on('server::emailSendResponse', function(data){
-        console.log(data);
+        if(data.status == 200){
+            vm.to =null;
+            vm.email =null;
+            vm.subj = null;
+            vm.emailBody = null;
+            $scope.newEmailForm.$setPristine();
+            $scope.$digest();
+            alert("Mail delivered");
+        }else{
+            alert("Mail not delivered");
+        }
     });
 
     this.onSendNewEmail = function(){
@@ -23,7 +33,10 @@ const NewEmailController = function (SMS) {
 
 NewEmailController.$inject = ['SMS', '$scope'];
 
-export default NewEmailController; 
+export default NewEmailController;
+
+
+
 
 
 
