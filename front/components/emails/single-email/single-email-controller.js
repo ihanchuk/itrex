@@ -1,9 +1,9 @@
-const SingleEmailController = function(SMS){
-    this.onDelete = (el)=>{
+const SingleEmailController = function(SMS, $scope){
+    this.onDelete = ()=>{
         SMS.emit('client::deleteEmailRequest', this.email);
     };
 };
 
-SingleEmailController.$inject=['SMS'];
+SingleEmailController.$inject=['SMS','$scope'];
 
 export default SingleEmailController;
