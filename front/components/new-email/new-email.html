@@ -1,0 +1,64 @@
+<h1>New Email</h1>
+<hr>
+<form novalidate="novalidate" name="newEmailForm">
+    <div class="form-group">
+        <label>To Person's name</label>
+        <input type="text"
+               class="form-control"
+               placeholder="Enter Person's name"
+               required="required"
+               name="to"
+               ng-class="{'ng-invalid': newEmailForm.to.$invalid}"
+               ng-model="$ctrl.to">
+        <small class="form-text text-muted"
+               ng-show="newEmailForm.to.$invalid && newEmailForm.to.$touched">
+                You need to fill Person the right way!.
+        </small>
+        <small class="form-text text-muted"
+               ng-show="newEmailForm.to.$pristine">
+               * reuired field.
+        </small>
+    </div>
+    <div class="form-group">
+        <label>Subject</label>
+        <input type="text"
+               class="form-control"
+               placeholder="subject"
+               required="required"
+               name="subj"
+               ng-model="$ctrl.subj">
+        <small class="form-text text-muted"
+               ng-show="newEmailForm.subj.$invalid && newEmailForm.subj.$touched">
+                You need to fill Subject.
+        </small>
+        <small class="form-text text-muted"
+               ng-show="newEmailForm.subj.$pristine">
+            * reuired field.
+        </small>
+    </div>
+    <div class="form-group">
+        <label>Email address</label>
+        <input type="email"
+               class="form-control"
+               placeholder="Enter subject"
+               required="required"
+               name="email"
+               ng-model="$ctrl.email">
+        <small class="form-text text-muted"
+               ng-show="newEmailForm.email.$invalid && newEmailForm.email.$touched">
+            you need to fill Email.
+        </small>
+        <small class="form-text text-muted"
+               ng-show="newEmailForm.email.$pristine">
+            * reuired field.
+        </small>
+    </div>
+    <div class="form-group">
+        <label for="exampleTextarea">Message  text</label>
+        <textarea class="form-control" id="exampleTextarea" rows="3" required="required" ng-model="$ctrl.emailBody"></textarea>
+    </div>
+    <button type="submit"
+            class="btn btn-primary"
+            ng-disabled="newEmailForm.$invalid"
+            ng-click="$ctrl.onSendNewEmail()">Submit new Email</button>
+</form>

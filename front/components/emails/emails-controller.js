@@ -6,7 +6,6 @@ const EmailsController = function (SMS, $scope) {
     SMS.on('server:deliveredNewEmails', (data)=>{
         if (data.status == 200) {
             $scope.emails = data.newEmails;
-            $scope.$digest();
         }
     });
 

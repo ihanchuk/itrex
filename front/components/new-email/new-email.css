@@ -1,0 +1,19 @@
+.ng-invalid{
+    border:1px solid #761c19;
+}
+
+form.ng-invalid{
+    border: none;
+}
+
+form.ng-pristine input, form.ng-pristine textarea{
+    border:1px solid #9da0a4;
+}
+
+form input.ng-touched.ng-valid{
+    border: 1px solid #4cae4c;
+}
+
+form input.ng-invalid.ng-touched{
+    border:1px solid crimson;
+}

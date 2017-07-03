@@ -16,6 +16,7 @@ import runLoader from './bootstrap/loaders/run-loader';
 import Root from './components/root-component';
 import Login from './components/login/login-component';
 import Emails from './components/emails/emails-component';
+import NewEmail from  './components/new-email/new-email-component';
 
 import singleEmail from './components/emails/single-email/single-email-directive';
 
@@ -24,6 +25,7 @@ const app = angular.module('app', [uiRouter, ngAnimate]);
 app.component('layout', new Root);
 app.component('login', new Login);
 app.component('emails', new Emails);
+app.component('newEmail', new NewEmail);
 
 app.constant('AUTH_EVENTS', authEvents);
 app.constant('USER_ROLES', roles);

@@ -8,6 +8,11 @@ const Routes= [
         name: 'login',
         url: '/',
         component: 'login'
+    },
+    {
+        name:'create',
+        url:'/create',
+        component: 'newEmail'
     }
 ];
 
