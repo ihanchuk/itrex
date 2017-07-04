@@ -24,6 +24,6 @@ const auth= ($http, Session)=>{
     };
 
     return authService;
-}
+};
 
 export default auth;

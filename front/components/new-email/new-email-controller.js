@@ -7,12 +7,13 @@ const NewEmailController = function (SMS, $scope) {
     let vm = this;
 
     SMS.on('server::emailSendResponse', function(data){
+        console.info('Socket response!!!!');
         if(data.status == 200){
             vm.to =null;
             vm.email =null;
             vm.subj = null;
             vm.emailBody = null;
-            $scope.newEmailForm.$setPristine();
+            //$scope.newEmailForm.$setPristine();
             $scope.$digest();
             alert("Mail delivered");
         }else{
@@ -34,6 +35,9 @@ const NewEmailController = function (SMS, $scope) {
 NewEmailController.$inject = ['SMS', '$scope'];
 
 export default NewEmailController;
+
+
+
 
 
 
